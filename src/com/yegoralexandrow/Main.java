@@ -17,7 +17,7 @@ public class Main {
             String operator = in.next();
             Number b = NumberFactory.createNumber(in.next());
 
-            if(checkOutOfLimit(a) || checkOutOfLimit(b)) throw new IllegalArgumentException();
+            if(checkOutOfLimit(a) || checkOutOfLimit(b)) throw new IllegalArgumentException("Args should be between 0 and 10");
 
             return a.op(operator, b);
         } catch (IllegalArgumentException | NoSuchElementException e) {
@@ -25,14 +25,16 @@ public class Main {
             e.printStackTrace();
             //System.exit(0);
         }
-        return new ArabicNumber(1);
+        return null;
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        while (in.hasNext()) {
-            System.out.println(calculate(in.nextLine()));
+        while (in.hasNextLine()) {
+            Number result = calculate(in.nextLine());
+
+            if(result != null) System.out.println(result);
         }
 
         in.close();

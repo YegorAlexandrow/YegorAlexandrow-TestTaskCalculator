@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 public class RomanNumber extends Number {
 
-    private static final TreeMap<Integer, String> mapToRoman = new TreeMap<Integer, String>();
+    private static final TreeMap<Integer, String> mapToRoman = new TreeMap<>();
     private static final Map<Character, Integer> mapFromRoman = new HashMap<>(7);
 
     static {
@@ -25,8 +25,6 @@ public class RomanNumber extends Number {
         mapFromRoman.put('X', 10);
         mapFromRoman.put('L', 50);
         mapFromRoman.put('C', 100);
-        mapFromRoman.put('D', 500);
-        mapFromRoman.put('M', 1000);
     }
 
     public RomanNumber(int value) {
@@ -35,6 +33,28 @@ public class RomanNumber extends Number {
 
     public RomanNumber(String value) {
         super(parseRoman(value), NumeralSystem.ROMAN);
+    }
+
+    @Override
+    public Number minus(Number num) {
+        Number result = super.minus(num);
+
+        if(result.getValue() <= 0) {
+            throw new IllegalArgumentException("Roman numbers don't have zero and negative numbers");
+        }
+
+        return result;
+    }
+
+    @Override
+    public Number divide(Number num) {
+        Number result = super.divide(num);
+
+        if(result.getValue() <= 0) {
+            throw new IllegalArgumentException("Roman numbers don't have zero and negative numbers");
+        }
+
+        return result;
     }
 
     private static int parseRoman(String value) {
@@ -54,8 +74,9 @@ public class RomanNumber extends Number {
     }
 
     public String toString() {
-        int value = getValue();
-        StringBuilder result = new StringBuilder("");
+        int value = Math.abs(getValue());
+
+        StringBuilder result = new StringBuilder();
 
         while(value > 0) {
             int l = mapToRoman.floorKey(value);

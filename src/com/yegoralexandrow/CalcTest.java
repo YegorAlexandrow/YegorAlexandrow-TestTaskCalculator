@@ -68,15 +68,25 @@ public class CalcTest {
     }
 
     @Test
-    public void lowerLimit() {
+    public void lowerLimitArabic() {
+        assertEquals(Main.calculate("7 - 10").toString(), "-3");
+    }
+
+    @Test
+    public void lowerLimitRoman() {
         Main.calculate("III - IV");
         assertThat(errContent.toString(), containsString("Incorrect expression!"));
     }
 
     @Test
-    public void zeroLimit() {
-        Main.calculate("3 * 0");
+    public void zeroLimitRoman() {
+        Main.calculate("V - V");
         assertThat(errContent.toString(), containsString("Incorrect expression!"));
+    }
+
+    @Test
+    public void zeroLimitArabic() {
+        assertEquals(Main.calculate("5 - 5").toString(), "0");
     }
 
     @Test

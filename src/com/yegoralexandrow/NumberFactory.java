@@ -7,7 +7,7 @@ public class NumberFactory {
     public static Number createNumber(String value) {
         switch (determineNumeralSystem(value)) {
 
-            case UNDEFINED: throw new IllegalArgumentException();
+            case UNDEFINED: throw new IllegalArgumentException("Unknown numeral system");
 
             case ROMAN: return new RomanNumber(value);
 
@@ -20,7 +20,7 @@ public class NumberFactory {
     public static Number createNumber(int value, NumeralSystem representation) {
         switch (representation) {
 
-            case UNDEFINED: throw new IllegalArgumentException();
+            case UNDEFINED: throw new IllegalArgumentException("Unknown numeral system");
 
             case ROMAN: return new RomanNumber(value);
 
